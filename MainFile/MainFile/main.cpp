@@ -35,6 +35,8 @@ int main()
             case 8:
                 free(pointer);
                 return 0;
+            default:
+                printf("Wrong number\n");
         }
     }
 }

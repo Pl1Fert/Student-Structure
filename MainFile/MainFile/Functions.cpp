@@ -1,63 +1,7 @@
 #include "Functions.hpp"
 
-
-int input_check_int()
-{
-    int read_count, is_empty;
-    int number;
-     
-    while (1)
-    {
-         read_count = scanf("%d", &number);
-         is_empty = ClearStdin();
-         if (read_count == 1 && is_empty != 0 && number > 0)
-         {
-             break;
-         }
-         printf("Invalid number format. Please enter the number\n");
-    }
-    return number;
-}
-
-int input_check_int_for_sort()
-{
-    int read_count, is_empty;
-    int number;
-     
-    while (1)
-    {
-         read_count = scanf("%d", &number);
-         is_empty = ClearStdin();
-         if (read_count == 1 && is_empty != 0 && (number == 1 || number == 2))
-         {
-             break;
-         }
-         printf("Invalid number format. Please enter the number\n");
-    }
-    return number;
-}
-
-float input_check_float()
-{
-    int read_count, is_empty;
-    float number;
-     
-    while (1)
-    {
-         read_count = scanf("%f", &number);
-         is_empty = ClearStdin();
-         if (read_count == 1 && is_empty != 0 && number > 0)
-         {
-             break;
-         }
-         printf("Invalid number format. Please enter the number\n");
-    }
-    return number;
-}
-
 int menu(void)
 {
-    //int choice;
     printf("Choose a numebr\n");
     printf("1-enter a new struct\n");
     printf("2-output a struct\n");
@@ -68,8 +12,6 @@ int menu(void)
     printf("7-part find students\n");
     printf("8-exit\n");
     printf("Your choice: ");
-    //scanf("%d",&choice);
-    //return choice;
     return input_check_int();
 }
 
@@ -101,7 +43,6 @@ void enter_struct(struct student *pointer,int amount)
         printf("Enter student's rating: ");
         rewind(stdin);
         pointer[i].rating = input_check_float();
-        //scanf("%f",&pointer[i].rating);
     }
 }
 
@@ -128,10 +69,9 @@ void output_struct(struct student *pointer,int amount)
 
 void header_delete(struct student *pointer, int &amount)
 {
-    int choice,number;
+    int number;
     char *enter_string = (char*)malloc(20*sizeof(char));
     char *buf_string = (char*)malloc(20*sizeof(char));
-    float buf_float;
     
     if (!pointer)
     {
@@ -151,7 +91,6 @@ void header_delete(struct student *pointer, int &amount)
         printf("7-Number\n");
         printf("8-Exit\n");
         printf("Your choice: ");
-        //scanf("%d",&choice);
         
         switch(input_check_int())
         {
@@ -233,10 +172,9 @@ void header_delete(struct student *pointer, int &amount)
               case 6:
                   printf("Enter rating\n");
                   rewind(stdin);
-                  scanf("%f",&buf_float);
                   for(int i = 0;i < amount;i++)
                   {
-                      if(pointer[i].rating == buf_float)
+                      if(pointer[i].rating == input_check_float())
                       {
                           delete_student(pointer,i,amount);
                       }
@@ -245,7 +183,6 @@ void header_delete(struct student *pointer, int &amount)
               case 7:
                   printf("Enter number\n");
                   rewind(stdin);
-                  //scanf("%d",&number);
                   number = input_check_int()-1;
                   delete_student(pointer,number,amount);
                   break;
@@ -280,9 +217,8 @@ void delete_student(struct student* pointer,int index,int& amount)
 
 void edit_student(struct student *pointer, int amount)
 {
-    int number,choice;
+    int number;
     char *buf_string = (char*)malloc(20*sizeof(char));
-    float buf_float;
     
     if (!pointer)
     {
@@ -292,7 +228,6 @@ void edit_student(struct student *pointer, int amount)
     
     printf("Choose what student you want to edit\n");
     printf("Your choice: ");
-    //scanf("%d",&number);
     number = input_check_int();
     
     while(1)
@@ -304,7 +239,6 @@ void edit_student(struct student *pointer, int amount)
         printf("5-Groupnumber\n");
         printf("6-Rating\n");
         printf("7-Exit\n");
-        //scanf("%d",&choice);
         
         switch (input_check_int())
         {
@@ -351,8 +285,6 @@ void edit_student(struct student *pointer, int amount)
             case 6:
                 printf("Enter new student's address: ");
                 rewind(stdin);
-                //scanf("%f",&buf_float);
-                //buf_float = input_check_float();
                 if(confirmation() == 1)
                     pointer[number-1].rating = input_check_float();
                 rewind(stdin);
@@ -367,8 +299,6 @@ void edit_student(struct student *pointer, int amount)
 
 void find(struct student *pointer, int amount)
 {
-    int number;
-    float buf_float;
     char *enter_string = (char*)malloc(20*sizeof(char));
     char *buf_string = (char*)malloc(20*sizeof(char));
 
@@ -389,7 +319,7 @@ void find(struct student *pointer, int amount)
         printf("6-Rating\n");
         printf("7-Exit\n");
         printf("Your choice: ");
-        //scanf("%d",&number);
+        
         switch(input_check_int())
         {
             case 1:
@@ -470,8 +400,7 @@ void find(struct student *pointer, int amount)
             case 6:
                 printf("Enter rating\n");
                 rewind(stdin);
-                //scanf("%f",&buf_float);
-                //buf_float = input_check_float();
+
                 for(int i = 0;i < amount;i++)
                 {
                     if(pointer[i].rating == input_check_float())
@@ -514,7 +443,7 @@ void string_to_lowercase(char *string)
 
 int confirmation()
 {
-    //int choice;
+
     printf("Are you sure?\n");
     printf("1-Yes\n");
     printf("2-No\n");
@@ -524,7 +453,6 @@ int confirmation()
 
 void header_sort(struct student *pointer, int amount)
 {
-    int choice;
     
     if (!pointer)
     {
@@ -543,7 +471,6 @@ void header_sort(struct student *pointer, int amount)
           printf("6-By rating\n");
           printf("7-Exit\n");
           printf("Your choice: ");
-          //scanf("%d",&choice);
           
           switch(input_check_int())
           {
@@ -569,13 +496,11 @@ void header_sort(struct student *pointer, int amount)
 
 void sort_lastname(struct student *pointer, int amount)
 {
-    //int choice;
     struct student temp;
     
     printf("\n1 - In ascending order\n");
     printf("2 - In descending order\n");
     printf("Your choice: ");
-    //scanf("%d", &choice);
     
     if(input_check_int_for_sort() == 1)
     {
@@ -607,13 +532,11 @@ void sort_lastname(struct student *pointer, int amount)
 
 void sort_name(struct student *pointer, int amount)
 {
-    int choice;
     struct student temp;
     
     printf("\n1 - In ascending order\n");
     printf("2 - In descending order\n");
     printf("Your choice: ");
-    //scanf("%d", &choice);
     
     if(input_check_int_for_sort() == 1)
     {
@@ -645,13 +568,11 @@ void sort_name(struct student *pointer, int amount)
 
 void sort_patronymic(struct student *pointer, int amount)
 {
-    int choice;
     struct student temp;
     
     printf("\n1 - In ascending order\n");
     printf("2 - In descending order\n");
     printf("Your choice: ");
-    //scanf("%d", &choice);
     
     if(input_check_int_for_sort() == 1)
     {
@@ -683,14 +604,11 @@ void sort_patronymic(struct student *pointer, int amount)
 
 void sort_address(struct student *pointer, int amount)
 {
-    int choice;
     struct student temp;
     
     printf("\n1 - In ascending order\n");
     printf("2 - In descending order\n");
     printf("Your choice: ");
-    //scanf("%d", &choice);
-    
     if(input_check_int_for_sort() == 1)
     {
         for(int i = 0; i< amount-1;i++)
@@ -721,13 +639,11 @@ void sort_address(struct student *pointer, int amount)
 
 void sort_groupnumber(struct student *pointer, int amount)
 {
-    int choice;
     struct student temp;
     
     printf("\n1 - In ascending order\n");
     printf("2 - In descending order\n");
     printf("Your choice: ");
-    //scanf("%d", &choice);
     
     if(input_check_int_for_sort() == 1)
     {
@@ -759,13 +675,11 @@ void sort_groupnumber(struct student *pointer, int amount)
 
 void sort_rating(struct student *pointer, int amount)
 {
-    int choice;
     struct student temp;
     
     printf("\n1 - In ascending order\n");
     printf("2 - In descending order\n");
     printf("Your choice: ");
-    //scanf("%d", &choice);
     
     if(input_check_int_for_sort() == 1)
     {
@@ -797,10 +711,8 @@ void sort_rating(struct student *pointer, int amount)
 
 void part_find(struct student* pointer,int amount)
 {
-    int choice;
     char *enter_string = (char*)malloc(20*sizeof(char));
     char *buf_string = (char*)malloc(20*sizeof(char));
-    float buf_float;
     
     if (!pointer)
     {
@@ -819,7 +731,6 @@ void part_find(struct student* pointer,int amount)
         printf("6-Rating\n");
         printf("7-Exit\n");
         printf("Your choice: ");
-       // scanf("%d",&choice);
         
         switch(input_check_int())
         {
@@ -901,8 +812,7 @@ void part_find(struct student* pointer,int amount)
             case 6:
                 printf("Enter rating\n");
                 rewind(stdin);
-                //scanf("%f",&buf_float);
-                //buf_float = input_check_float();
+
                 for(int i = 0;i < amount;i++)
                 {
                     if(pointer[i].rating == input_check_float())
@@ -946,6 +856,61 @@ int ClearStdin()
     }
     return rv;
 }
+
+int input_check_int()
+{
+    int read_count, is_empty;
+    int number;
+     
+    while (1)
+    {
+         read_count = scanf("%d", &number);
+         is_empty = ClearStdin();
+         if (read_count == 1 && is_empty != 0 && number > 0)
+         {
+             break;
+         }
+         printf("Invalid number format. Please enter the number\n");
+    }
+    return number;
+}
+
+int input_check_int_for_sort()
+{
+    int read_count, is_empty;
+    int number;
+     
+    while (1)
+    {
+         read_count = scanf("%d", &number);
+         is_empty = ClearStdin();
+         if (read_count == 1 && is_empty != 0 && (number == 1 || number == 2))
+         {
+             break;
+         }
+         printf("Invalid number format. Please enter the number\n");
+    }
+    return number;
+}
+
+float input_check_float()
+{
+    int read_count, is_empty;
+    float number;
+     
+    while (1)
+    {
+         read_count = scanf("%f", &number);
+         is_empty = ClearStdin();
+         if (read_count == 1 && is_empty != 0 && number > 0)
+         {
+             break;
+         }
+         printf("Invalid number format. Please enter the number\n");
+    }
+    return number;
+}
+
 /*
 void header_sort(struct student *pointer, int amount)
 {
