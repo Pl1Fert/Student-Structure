@@ -2,7 +2,7 @@
 
 int menu(void)
 {
-    printf("Choose a numebr\n");
+    printf("\nChoose a number\n");
     printf("1-enter a new struct\n");
     printf("2-output a struct\n");
     printf("3-delete selected student\n");
@@ -10,7 +10,8 @@ int menu(void)
     printf("5-edit selected student\n");
     printf("6-find students\n");
     printf("7-part find students\n");
-    printf("8-exit\n");
+    printf("8-add new students\n");
+    printf("9-exit\n");
     printf("Your choice: ");
     return input_check_int();
 }
@@ -20,26 +21,41 @@ void enter_struct(struct student *pointer,int amount)
     for(int i = 0;i < amount;i++)
     {
         printf("\nStudent %d: \n",i+1);
-        printf("Enter student's lastname: ");
-        rewind(stdin);
-        fgets(pointer[i].lastname,20,stdin);
-        
-        printf("Enter student's name: ");
-        rewind(stdin);
-        fgets(pointer[i].name,20,stdin);
-        
-        printf("Enter student's patronymic: ");
-        rewind(stdin);
-        fgets(pointer[i].patronymic,20,stdin);
-        
-        printf("Enter student's address: ");
-        rewind(stdin);
-        fgets(pointer[i].address,20,stdin);
-        
-        printf("Enter student's group number: ");
-        rewind(stdin);
-        fgets(pointer[i].group_number,20,stdin);
-        
+        while(1)
+        {
+            printf("Enter student's lastname: ");
+            rewind(stdin);
+            fgets(pointer[i].lastname,20,stdin);
+            if(pointer[i].lastname[0] != '\0' && pointer[i].lastname[0] != '\n' && pointer[i].lastname[0] != ' ' && check_string_for_number(pointer[i].lastname) == 0)break;
+        }
+        while(1)
+        {
+            printf("Enter student's name: ");
+            rewind(stdin);
+            fgets(pointer[i].name,20,stdin);
+            if(pointer[i].name[0] != '\0' && pointer[i].name[0] != '\n' && pointer[i].name[0] != ' ' && check_string_for_number(pointer[i].name) == 0)break;
+        }
+        while(1)
+        {
+            printf("Enter student's patronymic: ");
+            rewind(stdin);
+            fgets(pointer[i].patronymic,20,stdin);
+            if(pointer[i].patronymic[0] != '\0' && pointer[i].patronymic[0] != '\n' && pointer[i].patronymic[0] != ' ' && check_string_for_number(pointer[i].patronymic) == 0)break;
+        }
+        while(1)
+        {
+            printf("Enter student's address: ");
+            rewind(stdin);
+            fgets(pointer[i].address,20,stdin);
+            if(pointer[i].address[0] != '\0' && pointer[i].address[0] != '\n' && pointer[i].address[0] != ' ')break;
+        }
+        while(1)
+        {
+            printf("Enter student's group number: ");
+            rewind(stdin);
+            fgets(pointer[i].group_number,20,stdin);
+            if(pointer[i].group_number[0] != '\0' && pointer[i].group_number[0] != '\n' && pointer[i].group_number[0] != ' ')break;
+        }
         printf("Enter student's rating: ");
         rewind(stdin);
         pointer[i].rating = input_check_float();
@@ -243,47 +259,67 @@ void edit_student(struct student *pointer, int amount)
         switch (input_check_int())
         {
             case 1:
-                printf("Enter new student's lastname: ");
-                rewind(stdin);
-                fgets(buf_string, 20, stdin);
+                while(1)
+                {
+                    printf("Enter student's lastname: ");
+                    rewind(stdin);
+                    fgets(buf_string,20,stdin);
+                    if(buf_string[0] != '\0' && buf_string[0] != '\n' && buf_string[0] != ' ' && check_string_for_number(buf_string) == 0)break;
+                }
                 if(confirmation() == 1)
                     strcpy(pointer[number-1].lastname,buf_string);
                 rewind(stdin);
                 break;
             case 2:
-                printf("Enter new student's name: ");
-                rewind(stdin);
-                fgets(buf_string, 20, stdin);
+                while(1)
+                {
+                    printf("Enter student's name: ");
+                    rewind(stdin);
+                    fgets(buf_string,20,stdin);
+                    if(buf_string[0] != '\0' && buf_string[0] != '\n' && buf_string[0] != ' ' && check_string_for_number(buf_string) == 0)break;
+                }
                 if(confirmation() == 1)
                     strcpy(pointer[number-1].name,buf_string);
                 rewind(stdin);
                 break;
             case 3:
-                printf("Enter new student's patronymic: ");
-                rewind(stdin);
-                fgets(buf_string, 20, stdin);
+                while(1)
+                {
+                    printf("Enter student's patronymic: ");
+                    rewind(stdin);
+                    fgets(buf_string,20,stdin);
+                    if(buf_string[0] != '\0' && buf_string[0] != '\n' && buf_string[0] != ' ' && check_string_for_number(buf_string) == 0)break;
+                }
                 if(confirmation() == 1)
                     strcpy(pointer[number-1].patronymic,buf_string);
                 rewind(stdin);
                 break;
             case 4:
-                printf("Enter new student's address: ");
-                rewind(stdin);
-                fgets(buf_string, 20, stdin);
+                while(1)
+                {
+                    printf("Enter student's address: ");
+                    rewind(stdin);
+                    fgets(buf_string,20,stdin);
+                    if(buf_string[0] != '\0' && buf_string[0] != '\n' && buf_string[0] != ' ' )break;
+                }
                 if(confirmation() == 1)
                     strcpy(pointer[number-1].address,buf_string);
                 rewind(stdin);
                 break;
             case 5:
-                printf("Enter new student's address: ");
-                rewind(stdin);
-                fgets(buf_string, 20, stdin);
+                while(1)
+                {
+                    printf("Enter student's groupnumber: ");
+                    rewind(stdin);
+                    fgets(buf_string,20,stdin);
+                    if(buf_string[0] != '\0' && buf_string[0] != '\n' && buf_string[0] != ' ')break;
+                }
                 if(confirmation() == 1)
                     strcpy(pointer[number-1].group_number,buf_string);
                 rewind(stdin);
                 break;
             case 6:
-                printf("Enter new student's address: ");
+                printf("Enter new student's rating: ");
                 rewind(stdin);
                 if(confirmation() == 1)
                     pointer[number-1].rating = input_check_float();
@@ -443,7 +479,6 @@ void string_to_lowercase(char *string)
 
 int confirmation()
 {
-
     printf("Are you sure?\n");
     printf("1-Yes\n");
     printf("2-No\n");
@@ -909,6 +944,83 @@ float input_check_float()
          printf("Invalid number format. Please enter the number\n");
     }
     return number;
+}
+
+void add_student(struct student* pointer,int &amount)
+{
+    int index;
+    int i;
+    int buf;
+    
+    if (!pointer)
+    {
+       printf("No students:(\n");
+       return;
+    }
+    
+    index = amount;
+    printf("Enter amount of students to add: ");
+    buf=input_check_int();
+    amount+=buf;
+
+    for(int i = 0;i<buf;i++)pointer = (struct student*)realloc(pointer,1 * sizeof(struct student));
+    
+    for(i = index;i < amount;i++)
+    {
+        printf("\nStudent %d: \n",i+1);
+        while(1)
+        {
+            printf("Enter student's lastname: ");
+            rewind(stdin);
+            fgets(pointer[i].lastname,20,stdin);
+            if(pointer[i].lastname[0] != '\0' && pointer[i].lastname[0] != '\n' && pointer[i].lastname[0] != ' ' && check_string_for_number(pointer[i].lastname) == 0)break;
+        }
+        while(1)
+        {
+            printf("Enter student's name: ");
+            rewind(stdin);
+            fgets(pointer[i].name,20,stdin);
+            if(pointer[i].name[0] != '\0' && pointer[i].name[0] != '\n' && pointer[i].name[0] != ' ' && check_string_for_number(pointer[i].name) == 0)break;
+        }
+        while(1)
+        {
+            printf("Enter student's patronymic: ");
+            rewind(stdin);
+            fgets(pointer[i].patronymic,20,stdin);
+            if(pointer[i].patronymic[0] != '\0' && pointer[i].patronymic[0] != '\n' && pointer[i].patronymic[0] != ' ' && check_string_for_number(pointer[i].patronymic) == 0)break;
+        }
+        while(1)
+        {
+            printf("Enter student's address: ");
+            rewind(stdin);
+            fgets(pointer[i].address,20,stdin);
+            if(pointer[i].address[0] != '\0' && pointer[i].address[0] != '\n' && pointer[i].address[0] != ' ')break;
+        }
+        while(1)
+        {
+            printf("Enter student's groupnumber: ");
+            rewind(stdin);
+            fgets(pointer[i].group_number,20,stdin);
+            if(pointer[i].group_number[0] != '\0' && pointer[i].group_number[0] != '\n' && pointer[i].group_number[0] != ' ')break;
+        }
+        printf("Enter student's rating: ");
+        rewind(stdin);
+        pointer[i].rating = input_check_float();
+    }
+}
+
+int check_string_for_number(char *string)
+{
+    int i = 0;
+    while(string[i])
+    {
+        if(isdigit(string[i]) != 0)
+        {
+            return 1;
+        }
+        i++;
+    }
+    return 0;
 }
 
 /*

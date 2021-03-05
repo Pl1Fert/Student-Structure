@@ -22,6 +22,7 @@ int confirmation(void);
 int ClearStdin(void);
 int input_check_int(void);
 int input_check_int_for_sort(void);
+int check_string_for_number(char* string);
 float input_check_float(void);
 
 void enter_struct(struct student*,int amount);
@@ -29,6 +30,7 @@ void output_struct(struct student*,int amount);
 void header_delete(struct student*,int &amount);
 void delete_student(struct student*,int index,int &amount);
 void edit_student(struct student*,int amount);
+void add_student(struct student*,int &amount);
 
 void find(struct student*,int amount);
 void part_find(struct student*,int amount);

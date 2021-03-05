@@ -33,6 +33,9 @@ int main()
                 part_find(pointer,amount);
                 break;
             case 8:
+                add_student(pointer,amount);
+                break;
+            case 9:
                 free(pointer);
                 return 0;
             default:
